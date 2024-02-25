@@ -2,6 +2,7 @@ package com.example.homework26.presentation.screen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework26.databinding.ItemLayoutBinding
@@ -30,4 +31,11 @@ class HomeFragmentRecyclerViewAdapter :
         holder.bind(getItem(position))
     }
 
+    class CategoryDiffUtil : DiffUtil.ItemCallback<Categories>() {
+        override fun areItemsTheSame(oldItem: Categories, newItem: Categories): Boolean =
+            oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: Categories, newItem: Categories): Boolean =
+            oldItem == newItem
+    }
 }

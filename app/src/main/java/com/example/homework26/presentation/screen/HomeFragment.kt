@@ -32,7 +32,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun bindViewActionListeners() {
-        search()
+        setupSearchListener()
     }
 
     override fun bindObserves() {
@@ -45,13 +45,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private fun search() {
+    private fun setupSearchListener() {
         var searchJob: Job? = null
 
-        binding.etSearch.doAfterTextChanged {
+        binding.etSearch.doAfterTextChanged { editable ->
             searchJob?.cancel()
+
             searchJob = viewLifecycleOwner.lifecycleScope.launch {
-                val searchQuery = it.toString()
+                val searchQuery = editable.toString().trim()
 
                 if (searchQuery.isNotEmpty()) {
                     viewModel.onEvent(HomeEvent.FetchCategoryById(searchQuery))

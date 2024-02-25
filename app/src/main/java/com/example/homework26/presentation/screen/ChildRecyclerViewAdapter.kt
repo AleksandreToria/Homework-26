@@ -24,5 +24,4 @@ class ChildRecyclerViewAdapter(private val childrenCount: Int) :
     }
 
     override fun onBindViewHolder(holder: ChildrenViewHolder, position: Int) = Unit
-
 }
